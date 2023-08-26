@@ -47,13 +47,15 @@
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    fetch('https://script.google.com/macros/s/AKfycbxYiTIu6FYcFOmMY37BnasDJMb5ounEV-Hw7KyJvmQJ586uj1bHq5G-JCGWfyetEKU/exec')
+    fetch('https://script.google.com/macros/s/AKfycbwmy0w7w4fBREGRMcDtL4dAwTLk5aEC2sbGENPi8rUTMHXJGPVoCfoDeDffPL52QK4/exec')
 							.then(response => response.json())
 							.then(data => {
                 for (var i = 0; i < data.length; i++) {
                   if (data[i].username === username && data[i].password === password) {
                       console.log('登入成功');
-                      window.location.href = 'main.html';
+                      // 將帳號和密碼添加到 URL 參數中
+                      window.location.href = `main.html?username=${username}&password=${password}&childname=${data[i].childname}&parentname=${data[i].parentname}&classroom=${data[i].classroom}`;
+                      
                       return; // 加上 return 以防止多次跳轉
                   }
                 }
