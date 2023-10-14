@@ -61,7 +61,6 @@
                       console.log('登入成功');
                       // 將帳號和密碼添加到 URL 參數中
                       window.location.href = `main.html?username=${username}&password=${password}&childname=${data[i].childname}&parentname=${data[i].parentname}&classroom=${data[i].classroom}`;
-                      
                       return; // 加上 return 以防止多次跳轉
                   }
                 }
@@ -73,7 +72,6 @@
                 alert('發生錯誤。');
 							});
     }
-
   </script>
       
 </body>
