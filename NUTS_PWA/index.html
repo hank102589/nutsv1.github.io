@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>核果資訊學苑-高雄校</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href='images/android/playstore-icon.png'>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .login-container {
+      margin: 50px auto;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .login-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px;
+    }
+    .login-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>登入</h2>
+    <input type="text" class="login-input" placeholder="使用者名稱" id="username">
+    <input type="password" class="login-input" placeholder="密碼" id="password">
+    <button class="login-button" onclick="login()">登入</button>
+  </div>
+
+  <script>
+    async function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    fetch('https://script.google.com/macros/s/AKfycbwmy0w7w4fBREGRMcDtL4dAwTLk5aEC2sbGENPi8rUTMHXJGPVoCfoDeDffPL52QK4/exec')
+							.then(response => response.json())
+							.then(data => {
+                for (var i = 0; i < data.length; i++) {
+                  if (data[i].username === username && data[i].password === password) {
+                      console.log('登入成功');
+                      // 將帳號和密碼添加到 URL 參數中
+                      window.location.href = `main.html?username=${username}&password=${password}&childname=${data[i].childname}&parentname=${data[i].parentname}&classroom=${data[i].classroom}`;
+                      return; // 加上 return 以防止多次跳轉
+                  }
+                }
+                console.log('登入失敗');
+                alert('登入失敗，請檢查您的使用者名稱和密碼。');
+							})
+							.catch(error => {
+								console.error('發生錯誤：', error);
+                alert('發生錯誤。');
+							});
+    }
+  </script>
+      
+</body>
+</html>
